@@ -1,0 +1,27 @@
+version: '3.5'
+services:
+  frontend:
+    build:
+      dockerfile: ./frontend/Dockerfile
+    container_name: frontend
+    tty: true
+
+  backend:
+    build:
+      dockerfile: ./backend/Dockerfile
+    container_name: backend
+    tty: true
+
+  web:
+    container_name: webserver
+    image: nginx:1.23.3
+
+  db:
+    container_name: database
+    image: mysql:8.0.32
+    environment:
+      MYSQL_ROOT_PASSWORD: "admin"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_RANDOM_ROOT_PASSWORD: ""
+    # depends_on:
+    #   - backend
